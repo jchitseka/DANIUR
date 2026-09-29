@@ -1,0 +1,156 @@
+/* -*- coding: utf-8 -*-
+   AGRIVANA — mobile right-side navigation drawer (hamburger -> slide-in).
+   Scoped EXCLUSIVELY to <=809.98px. Desktop/tablet >=810px untouched.
+   The drawer is plain markup + a tiny vanilla toggle (no Framer runtime).
+   ======================================================================= */
+
+.nav-toggle,
+.nav-backdrop,
+.nav-drawer {
+  display: none !important;
+}
+
+@media (max-width: 809.98px) {
+
+  /* Replace the SSR inline menu pill row + in-bar "Request a Quote" CTA with
+     the hamburger + drawer. Original framer classes stay in the markup so the
+     desktop layout (>=810px) keeps them. */
+  .framer-1gij8z7-container .framer-14rploa,
+  .framer-1gij8z7-container .framer-18j9aq6-container,
+  .framer-1gij8z7-container .framer-1fiymvx {
+    display: none !important;
+  }
+
+  /* ---- hamburger button (right of the fixed nav bar) ---- */
+  .nav-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 47px;
+    height: 47px;
+    padding: 0;
+    margin-left: auto;
+    border: 0;
+    border-radius: 100px;
+    background: var(--token-e9cd311e-b105-4114-9f8d-2d0ae1cafbd1, rgb(236, 254, 240));
+    color: #09190d;
+    cursor: pointer;
+    z-index: 22;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-toggle svg { display: block; width: 24px; height: 24px; }
+  .nav-toggle .icon-close { display: none; }
+  html.nav-open .nav-toggle .icon-open  { display: none; }
+  html.nav-open .nav-toggle .icon-close { display: block; }
+
+  /* ---- backdrop ---- */
+  .nav-backdrop {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    z-index: 88;
+    background: rgba(9, 25, 13, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+  }
+  html.nav-open .nav-backdrop { opacity: 1; visibility: visible; }
+
+  /* ---- drawer: right slide-in panel ---- */
+  .nav-drawer {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 90;
+    height: 100dvh;
+    height: 100vh;
+    width: min(84vw, 360px);
+    background: #fbfffb;
+    color: #09190d;
+    transform: translateX(106%);
+    transition: transform 0.34s cubic-bezier(0.32, 0.72, 0.25, 1);
+    will-change: transform;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: -20px 0 48px rgba(9, 25, 13, 0.2);
+  }
+  html.nav-open .nav-drawer { transform: translateX(0); }
+  html.nav-open { overflow: hidden; }
+
+  /* ---- drawer contents ---- */
+  .nav-drawer .drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 18px 16px;
+    border-bottom: 1px solid rgba(9, 25, 13, 0.08);
+  }
+  .nav-drawer .drawer-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font: 600 20px/1 "Gambetta", "Gambetta Placeholder", serif;
+    letter-spacing: 0.01em;
+    color: #09190d;
+    text-decoration: none;
+  }
+  .nav-drawer .drawer-wordmark svg { width: 24px; height: 24px; flex: none; }
+  .nav-drawer .drawer-close {
+    width: 40px;
+    height: 40px;
+    margin-right: -8px;
+    border: 0;
+    border-radius: 12px;
+    background: rgba(9, 25, 13, 0.06);
+    color: #09190d;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-drawer .drawer-links {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 12px;
+    gap: 2px;
+  }
+  .nav-drawer .drawer-links a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 12px;
+    border-radius: 12px;
+    color: #09190d;
+    font: 600 19px/1.2 "Gambetta", "Gambetta Placeholder", serif;
+    text-decoration: none;
+  }
+  .nav-drawer .drawer-links a:active { background: rgba(9, 25, 13, 0.07); }
+  .nav-drawer .drawer-links a svg { width: 21px; height: 21px; flex: none; }
+  .nav-drawer .drawer-cta {
+    display: block;
+    margin: 14px 14px 6px;
+    padding: 15px 16px;
+    border-radius: 100px;
+    background: #09190d;
+    color: #ecfeee;
+    font: 600 17px/1 "Gambetta", "Gambetta Placeholder", serif;
+    text-align: center;
+    text-decoration: none;
+  }
+  .nav-drawer .drawer-phone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px 14px 20px;
+    color: #09190d;
+    font: 600 16px/1.2 "Gambetta", "Gambetta Placeholder", serif;
+    text-decoration: none;
+  }
+  .nav-drawer .drawer-phone svg { width: 18px; height: 18px; }
+}

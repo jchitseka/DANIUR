@@ -1,0 +1,84 @@
+/* DANIUR site — mobile/tablet responsiveness overlay.
+
+   framer.css's own @media blocks were compiled out of the static export
+   (Framer publishes them into runtime/element css that isn't emitted here), so
+   on narrow screens framer's SSRed desktop geometry is what actually renders:
+   a fixed navbar offset with translateX(-50%), 86px hero type, multi-col
+   grids, and text cards stretched to the height of neighbouring image cards.
+   Every rule below only fires under the small-tablet breakpoint; the
+   desktop-and-up experience (>= 1200px) is never touched. */
+
+@media (max-width: 809.98px) {
+  /* ---- NAVBAR ---------------------------------------------------------
+     The fixed "Navigation Bar" is SSRed with transform:translateX(-50%) to
+     center a full-width bar; its inline style keeps winning over framer.css.
+     Neutralize it and let the pill's flex rows wrap on small phones. */
+  .framer-1gij8z7-container {
+    transform: none !important;
+    width: 100vw !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  .framer-AlxTJ .framer-loo1v4 {
+    flex-wrap: wrap !important;
+    align-content: flex-start !important;
+    gap: 14px 20px !important;
+    padding: 16px 22px !important;
+    height: auto !important;
+    min-height: 72px !important;
+    border-radius: 22px !important;
+  }
+  .framer-AlxTJ .framer-x8tbbh {
+    flex-wrap: wrap !important;
+    gap: 10px 20px !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+  .framer-AlxTJ .framer-10wpvpn { flex: none !important; }
+  .framer-AlxTJ .framer-1fiymvx { display: none !important; }
+
+  /* ---- HERO -----------------------------------------------------------
+     Stop the section clipping its stacked content at the fixed 80vh, and
+     clamp the inline 86px headline so it fits a phone. */
+  .framer-m2q1yl {
+    height: auto !important;
+    min-height: 80vh !important;
+    padding-top: 120px !important;
+    padding-bottom: 70px !important;
+  }
+  .framer-vbe71d {
+    height: auto !important;
+    gap: 26px !important;
+    padding: 30px 24px 44px !important;
+  }
+  .framer-70lsp1 p,
+  .framer-70lsp1 .framer-styles-preset-1xuzb9p p,
+  .framer-70lsp1 h2,
+  .framer-70lsp1 h4 {
+    font-size: clamp(38px, 12.5vw, 64px) !important;
+  }
+  .framer-70lsp1 p,
+  .framer-70lsp1 .framer-text span {
+    --framer-font-size: clamp(38px, 12.5vw, 64px) !important;
+    --framer-letter-spacing: -1.5px !important;
+    --framer-line-height: 1.08 !important;
+  }
+
+  /* ---- WHY section text cards: stop forcing them to stretch to the
+         height of the neighbouring image cards --------------------------- */
+  .framer-1wv4cin .framer-1opaihs,
+  .framer-1wv4cin .framer-ayjabo,
+  .framer-1wv4cin .framer-1muemuf,
+  .framer-1wv4cin .framer-1ich4qt {
+    height: min-content !important;
+    align-self: flex-start !important;
+  }
+
+  /* ---- CTA TITLE: shrink the oversized headline on phones -------------- */
+  .framer-orlg60 .framer-1nugd73 p,
+  .framer-orlg60 .framer-1nugd73 .framer-text span {
+    --framer-font-size: clamp(30px, 9.5vw, 55px) !important;
+    --framer-letter-spacing: -1px !important;
+    --framer-line-height: 1.12 !important;
+  }
+}
